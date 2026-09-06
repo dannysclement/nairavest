@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NairaVest Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{brand:'#D4AF37',ndark:'#0A0F0D',nborder:'#1E2A24',ngold:'#FFD700'}}}};
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="toastContainer"></div>
+<main class="max-w-7xl mx-auto px-4 py-8">
+  <div class="flex items-center justify-between mb-8">
+    <div><h1 class="text-3xl font-black gold-gradient">NairaVest Admin</h1><p class="text-gray-500 text-sm">Private administration area</p></div>
+    <button onclick="adminLogout()" class="px-4 py-2 rounded-lg border border-red-400/30 text-red-400">Logout</button>
+  </div>
+
+  <section id="adminLogin" class="max-w-md mx-auto glass rounded-2xl p-8">
+    <h2 class="text-xl font-bold mb-5">Admin Login</h2>
+    <input id="adminUsername" placeholder="Admin username" class="mb-4">
+    <input id="adminPassword" type="password" placeholder="Admin password" class="mb-4">
+    <button onclick="adminLogin()" class="w-full py-3 gold-btn rounded-xl font-bold">Login</button>
+  </section>
+
+  <section id="adminPanel" class="hidden">
+    <div class="grid md:grid-cols-3 gap-5 mb-6">
+      <div class="glass rounded-2xl p-5"><p class="text-gray-400">Users</p><p id="statUsers" class="text-3xl font-black gold-gradient">0</p></div>
+      <div class="glass rounded-2xl p-5"><p class="text-gray-400">Pending Deposits</p><p id="statDeposits" class="text-3xl font-black gold-gradient">0</p></div>
+      <div class="glass rounded-2xl p-5"><p class="text-gray-400">Pending Withdrawals</p><p id="statWithdrawals" class="text-3xl font-black gold-gradient">0</p></div>
+    </div>
+
+    <div class="glass rounded-2xl p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">Settings</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <input id="adminFeePercent" type="number" step="0.1" placeholder="Fee %">
+        <input id="adminFeePerNaira" type="number" step="0.01" placeholder="Fee per Naira">
+        <input id="adminReferralPercent" type="number" step="0.1" placeholder="Referral %">
+      </div>
+      <button onclick="saveAdminSettings()" class="mt-4 px-5 py-2 gold-btn rounded-lg font-bold">Save</button>
+    </div>
+
+    <div class="glass rounded-2xl p-6 mb-6"><h2 class="text-xl font-bold mb-4">Pending Deposits</h2><div id="pendingDepositsList"></div></div>
+    <div class="glass rounded-2xl p-6 mb-6"><h2 class="text-xl font-bold mb-4">Withdrawal Requests</h2><div id="withdrawalRequestsList"></div></div>
+    <div class="glass rounded-2xl p-6"><h2 class="text-xl font-bold mb-4">Users</h2><div id="allUsersList"></div></div>
+  </section>
+</main>
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
